@@ -1,0 +1,13 @@
+<p-card
+  class="note-card"
+[header]="note.title"
+>
+  <div class="flex justify-content-between">
+   <span>{{note.text}}</span>
+    <div class="flex">
+    <button pButton icon="pi pi-pencil" (click)="editNote(note)" class="mr-3"></button>
+    <button pButton icon="pi pi-trash"></button>
+
+  </div>
+  </div>
+</p-card>

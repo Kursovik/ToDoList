@@ -1,0 +1,9 @@
+<p-card header="Заметки">
+  <div class="flex justify-content-center">
+    <input class="w-6" pInputText placeholder="Поиск..." />
+    <button class="ml-3" pButton label="Добавить" (click)="openNotesDialog()"></button>
+  </div>
+  <div class="notes-wrapper">
+    <app-note *ngFor="let note of notes$ | async" [note]="note"></app-note>
+  </div>
+</p-card>
