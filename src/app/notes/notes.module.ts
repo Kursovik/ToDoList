@@ -13,11 +13,12 @@ import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import { NotesFormComponent } from './notes/pages/notes-form/notes-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { NotesDialogComponent } from './notes/pages/notes-dialog/notes-dialog.component';
-
+import { NoteSearchComponent } from './notes/pages/note-search/note-search.component';
+import {CarouselModule} from "../shared/components/carousel/carousel.module";
 
 
 @NgModule({
-  declarations: [NotesComponent, NoteComponent, NotesFormComponent, NotesDialogComponent],
+  declarations: [NotesComponent, NoteComponent, NotesFormComponent, NotesDialogComponent, NoteSearchComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -31,7 +32,7 @@ import { NotesDialogComponent } from './notes/pages/notes-dialog/notes-dialog.co
     CardModule,
     DynamicDialogModule,
     ReactiveFormsModule,
-
+    CarouselModule,
   ],
   providers:[NotesApiService,NotesStateService,NotesLogicService, DialogService]
 })

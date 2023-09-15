@@ -13,25 +13,28 @@ export class NotesLogicService {
   public getNotes() {
     return this.notesApiService.getAll().pipe(
       tap((data) => {
-        console.log(data);
         this.notesStateService.setNotesState(data);
       }),
     );
   }
   public createNotes(note: Note) {
-    return  this.notesApiService.create(note).pipe(
+    return this.notesApiService.create(note).pipe(
       tap((note) => {
-        this.notesStateService.getState().push(note)
+        this.notesStateService.getState().push({
+          ...note,
+          id: this.notesStateService.getState().length + 1,
+        });
       }),
     );
   }
   public editNotes(data: Note) {
-    return  this.notesApiService.edit(data).pipe(
-      tap((notes) => {
-        this.notesStateService.setNotesState(this.notesStateService.getState().map(note=>({
-          ...note,
-          ...data,
-        })))
+    return this.notesApiService.edit(data).pipe(
+      tap(() => {
+        this.notesStateService.setNotesState(
+          this.notesStateService.getState().map((note) => {
+            return note.id === data.id ? { ...data } : { ...note };
+          }),
+        );
       }),
     );
   }

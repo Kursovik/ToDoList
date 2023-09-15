@@ -1,26 +1,41 @@
-import {Component, OnInit} from '@angular/core';
-import {NotesLogicService} from "./services/notes-logic.service";
-import {NotesStateService} from "./services/notes-state.service";
-import {NotesDialogService} from "./services/notes-dialog.service";
+import { Component, OnInit } from '@angular/core';
+import { NotesLogicService } from './services/notes-logic.service';
+import { NotesStateService } from './services/notes-state.service';
+import { NotesDialogService } from './services/notes-dialog.service';
+import { Note } from '../types/note';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css'],
-  providers:[NotesDialogService],
+  styleUrls: ['./notes.component.scss'],
+  providers: [NotesDialogService],
 })
-export class NotesComponent implements  OnInit {
+export class NotesComponent implements OnInit {
   public notes$ = this.notesStateService.getNotesStateObservable();
-  constructor(private notesLogicService: NotesLogicService, private notesStateService: NotesStateService,private dialogService: NotesDialogService) {
-  }
+  private notesCopy: Note[];
+  constructor(
+    private notesLogicService: NotesLogicService,
+    private notesStateService: NotesStateService,
+    private dialogService: NotesDialogService,
+  ) {}
   public ngOnInit(): void {
     this.getNotes();
+    this.notesCopy = [...this.notesStateService.getState()];
   }
-  private getNotes(){
+  private getNotes() {
     this.notesLogicService.getNotes().subscribe();
   }
   public openNotesDialog(): void {
     this.dialogService.openDialog().onClose.subscribe();
   }
 
+  public searchNotes(str: string): void {
+    str
+      ? this.notesStateService.setNotesState(
+          this.notesCopy.filter((data) => {
+            return data.title.toLowerCase().includes(str.toLowerCase());
+          }),
+        )
+      : this.notesStateService.setNotesState(this.notesCopy);
+  }
 }

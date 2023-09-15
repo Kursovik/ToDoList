@@ -1,0 +1,14 @@
+:host ::ng-deep{
+  .p-button{
+    border: none;
+    background-color: transparent !important;
+    display: flex;
+    justify-content: center;
+  }
+  .p-button:hover{
+    background-color: rgba(201, 201, 201, 0.45) !important;
+  }
+  .pi-angle-left:before , .pi-angle-right:before{
+    font-size: 25px;
+  }
+}

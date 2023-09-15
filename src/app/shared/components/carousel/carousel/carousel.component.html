@@ -1,0 +1,16 @@
+<div class="flex justify-content-between mt-4">
+  <button class="carousel-button-left mr-2"  pButton (click)="prevValues()">
+    <span class="pi pi-angle-left"></span>
+  </button>
+<div class="grid">
+  <ng-container *ngFor="let value of valuesView">
+  <ng-container
+    *ngTemplateOutlet="body; context: {$implicit: value}"
+  ></ng-container>
+  </ng-container>
+
+</div>
+  <button pButton class="carousel-button-right ml-2" (click)="nextValues()">'
+      <span class="pi pi-angle-right"></span>
+  </button>
+</div>

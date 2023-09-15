@@ -1,0 +1,11 @@
+::ng-deep{
+.p-button{
+  color: #343434;
+  background: rgba(211, 211, 211, 0.61) !important;
+  border: none;
+}
+.p-button:hover{
+  background: rgb(211, 211, 211) !important;
+  color: rgb(114, 114, 114) !important;
+}
+}

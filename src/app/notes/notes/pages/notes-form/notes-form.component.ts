@@ -34,6 +34,7 @@ export class NotesFormComponent implements OnInit {
     this.submitted.emit({
       ...this.noteForm.value,
       createdOn: new Date(),
+      id: this.configData && this.configData?.id
     });
   }
 
