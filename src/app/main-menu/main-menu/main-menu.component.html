@@ -1,0 +1,13 @@
+<div class="w-full flex justify-content-center mt-4">
+  <div class="grid w-6">
+    <ng-container *ngFor="let category of categories">
+      <p-card class="col" (click)="menuNavigate(category.routerLink)" [header]="category.title">
+         <div>
+           <span>
+             {{category.description}}
+           </span>
+         </div>
+      </p-card
+    ></ng-container>
+  </div>
+</div>

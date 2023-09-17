@@ -1,4 +1,4 @@
-<p-card header="Заметки" class="notes-card">
+<p-card class="notes-card">
   <div class="w-full flex flex-column align-items-center">
     <div class="w-7 flex justify-content-between">
       <app-note-search
@@ -12,12 +12,10 @@
         (click)="openNotesDialog()"
       ></button>
     </div>
-    <div class="w-full">
-      <app-carousel [values]="$any(notes$ | async)" [numOfVisibleValues]="5">
-        <ng-template #body let-note
-          ><app-note class="col" [note]="note"></app-note
-        ></ng-template>
-      </app-carousel>
+    <div class="w-full grid mt-3">
+      <div class="col-4" *ngFor="let note of notes$ | async">
+        <app-note [note]="note"></app-note>
+      </div>
     </div>
   </div>
 </p-card>

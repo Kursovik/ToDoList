@@ -1,0 +1,8 @@
+:host ::ng-deep{
+  .p-card{
+    cursor:pointer;
+  }
+  .p-card:hover{
+    background-color: rgba(189, 189, 189, 0.2)
+  }
+}

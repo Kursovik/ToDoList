@@ -5,7 +5,10 @@ import { NotesDialogService } from '../../services/notes-dialog.service';
 @Component({
   selector: 'app-note',
   template: `<p-card class="note-card" [header]="note.title">
-    <span>{{ note?.text }}</span>
+    <div class="flex flex-column">
+    <span class="col">{{ note.text }}</span>
+    <span class="font-italic col">Дата создания: {{note.createdOn | date : 'dd.MM.yy' }}</span>
+    </div>
     <ng-template pTemplate="footer">
       <div class="w-full flex justify-content-end">
         <button pButton (click)="editNote(note)" class="mr-3">

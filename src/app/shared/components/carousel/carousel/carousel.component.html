@@ -2,7 +2,7 @@
   <button class="carousel-button-left mr-2"  pButton (click)="prevValues()">
     <span class="pi pi-angle-left"></span>
   </button>
-<div class="grid">
+<div class="flex">
   <ng-container *ngFor="let value of valuesView">
   <ng-container
     *ngTemplateOutlet="body; context: {$implicit: value}"

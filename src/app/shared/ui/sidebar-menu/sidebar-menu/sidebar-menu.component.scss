@@ -1,0 +1,19 @@
+:host ::ng-deep {
+  .p-sidebar .p-sidebar-content {
+    padding: 0;
+  }
+  .p-sidebar .p-sidebar-header {
+    padding-left: 0;
+  }
+  .p-button {
+    border: none;
+    background-color: transparent !important;
+    &-label {
+      font-size: 1.5rem;
+    }
+  }
+  .p-menu {
+    width: 100% !important;
+    border: none;
+  }
+}
