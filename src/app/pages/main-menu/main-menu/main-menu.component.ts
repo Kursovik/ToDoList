@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {menuCategories} from "../../shared/constants/menu-categories";
+import {menuCategories} from "../../../shared/constants/menu-categories";
 
 @Component({
   selector: 'app-main-menu',

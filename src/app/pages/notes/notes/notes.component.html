@@ -12,10 +12,16 @@
         (click)="openNotesDialog()"
       ></button>
     </div>
-    <div class="w-full grid mt-3">
+    <div
+      class="w-full grid mt-3"
+      *ngIf="(notes$ | async)?.length; else emptyNotes"
+    >
       <div class="col-4" *ngFor="let note of notes$ | async">
         <app-note [note]="note"></app-note>
       </div>
     </div>
   </div>
 </p-card>
+<ng-template #emptyNotes>
+  <span>Заметки не найдены</span>
+</ng-template>

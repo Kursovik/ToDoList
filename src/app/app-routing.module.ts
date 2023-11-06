@@ -4,12 +4,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./main-menu/main-menu.module').then((m) => m.MainMenuModule),
+      import('./pages/main-menu/main-menu.module').then((m) => m.MainMenuModule),
   },
   {
     path: 'notes',
     loadChildren: () =>
-      import('./notes/notes.module').then((m) => m.NotesModule),
+      import('./pages/notes/notes.module').then((m) => m.NotesModule),
+  },
+  {
+
   },
   {
     path: '**',

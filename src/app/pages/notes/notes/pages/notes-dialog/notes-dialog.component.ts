@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NotesLogicService } from '../../services/notes-logic.service';
 import { Note } from '../../../types/note';
-import { every } from 'rxjs';
 
 @Component({
   selector: 'app-notes-dialog',
@@ -10,7 +9,7 @@ import { every } from 'rxjs';
   styleUrls: ['./notes-dialog.component.scss'],
 })
 export class NotesDialogComponent {
-  public config = this.configData.data;
+  public note = this.configData.data;
   constructor(
     private configData: DynamicDialogConfig,
     private ref: DynamicDialogRef,
@@ -22,7 +21,7 @@ export class NotesDialogComponent {
     this.ref.close(note);
   }
   private checkConfig(note: Note) {
-    return this.config
+    return this.note
       ? this.notesLogicService.editNotes(note)
       : this.notesLogicService.createNotes(note);
   }

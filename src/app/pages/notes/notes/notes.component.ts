@@ -3,6 +3,7 @@ import { NotesLogicService } from './services/notes-logic.service';
 import { NotesStateService } from './services/notes-state.service';
 import { NotesDialogService } from './services/notes-dialog.service';
 import { Note } from '../types/note';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -38,4 +39,6 @@ export class NotesComponent implements OnInit {
         )
       : this.notesStateService.setNotesState(this.notesCopy);
   }
+
+  protected readonly length = length;
 }

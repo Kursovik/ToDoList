@@ -1,10 +1,24 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { Note } from '../../types/note';
+import {ApiServiceAbstract} from "../abstract-models/api-service-abstract";
+import {Observable, of} from "rxjs";
 
-@Injectable()
-export class NotesApiService {
-  public getAll() {
+@Injectable({
+  providedIn: 'root'
+})
+export class BaseApiService<T> extends ApiServiceAbstract<T>{
+  create(data: T): Observable<T> {
+    return of(data);
+  }
+
+  delete(id: number): Observable<number> {
+    return of(id);
+  }
+
+  edit(data: T): Observable<T> {
+    return of(data);
+  }
+
+  getAll(): Observable<T[]> {
     return of([
       {
         title: 'Note1',
@@ -48,15 +62,6 @@ export class NotesApiService {
         text: 'lorem ipsum dolor sit amet, consectetur',
         id: 7,
       },
-    ]);
-  }
-  public create(note: Note) {
-    return of(note);
-  }
-  public edit(note: Note) {
-    return of(note);
-  }
-  public delete(id: string) {
-    return of(id);
+    ]) as unknown as Observable<T[]>;
   }
 }

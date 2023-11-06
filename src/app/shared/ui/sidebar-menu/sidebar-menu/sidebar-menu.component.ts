@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {  NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { menuCategories } from '../../../constants/menu-categories';
-import { MenuItem } from "primeng/api";
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -15,19 +15,19 @@ export class SidebarMenuComponent implements OnInit {
   public items: MenuItem[] = [];
   constructor(public readonly router: Router) {}
   public ngOnInit(): void {
-    this.initItems()
+    this.initItems();
     this.initCurrentPageTitle();
   }
   public initItems(): void {
-    this.menuCategories.forEach(category=>{
+    this.menuCategories.forEach((category) => {
       this.items.push({
         label: category.title,
-        command:()=>{
-          this.router.navigate([`/${category.routerLink}`])
-          this.sidebarVisible = false
-        }
-      })
-    })
+        command: () => {
+          this.router.navigate([`/${category.routerLink}`]);
+          this.sidebarVisible = false;
+        },
+      });
+    });
   }
   private initCurrentPageTitle() {
     this.router.events.subscribe((event) => {
@@ -39,7 +39,6 @@ export class SidebarMenuComponent implements OnInit {
   private checkCurrentPageTitle(url: string) {
     let arrayUrl = url.split('/');
     this.menuCategories.forEach((category) => {
-      console.log(category.routerLink === arrayUrl[1]);
       if (category.routerLink === arrayUrl[1]) {
         this.currentPageTitle = category.title;
         return;
@@ -48,6 +47,4 @@ export class SidebarMenuComponent implements OnInit {
       }
     });
   }
-
-
 }

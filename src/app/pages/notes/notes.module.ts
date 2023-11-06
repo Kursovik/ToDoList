@@ -6,7 +6,6 @@ import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
 import { NoteComponent } from './notes/pages/note/note.component';
-import {NotesApiService} from "./notes/services/notes-api.service";
 import {NotesStateService} from "./notes/services/notes-state.service";
 import {NotesLogicService} from "./notes/services/notes-logic.service";
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
@@ -14,11 +13,14 @@ import { NotesFormComponent } from './notes/pages/notes-form/notes-form.componen
 import {ReactiveFormsModule} from "@angular/forms";
 import { NotesDialogComponent } from './notes/pages/notes-dialog/notes-dialog.component';
 import { NoteSearchComponent } from './notes/pages/note-search/note-search.component';
-import {CarouselModule} from "../shared/components/carousel/carousel.module";
+import {CarouselModule} from "../../shared/components/carousel/carousel.module";
+import { NoteDetailsComponent } from './notes/pages/note-details/note-details.component';
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {SliceTextModule} from "../../shared/pipes/slice-text/slice-text.module";
 
 
 @NgModule({
-  declarations: [NotesComponent, NoteComponent, NotesFormComponent, NotesDialogComponent, NoteSearchComponent],
+  declarations: [NotesComponent, NoteComponent, NotesFormComponent, NotesDialogComponent, NoteSearchComponent, NoteDetailsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -26,6 +28,10 @@ import {CarouselModule} from "../shared/components/carousel/carousel.module";
         path: '',
         component: NotesComponent,
       },
+      {
+        path: ':id',
+        component: NoteDetailsComponent,
+      }
     ]),
     ButtonModule,
     InputTextModule,
@@ -33,7 +39,9 @@ import {CarouselModule} from "../shared/components/carousel/carousel.module";
     DynamicDialogModule,
     ReactiveFormsModule,
     CarouselModule,
+    InputTextareaModule,
+    SliceTextModule,
   ],
-  providers:[NotesApiService,NotesStateService,NotesLogicService, DialogService]
+  providers:[NotesStateService,NotesLogicService, DialogService]
 })
 export class NotesModule {}
