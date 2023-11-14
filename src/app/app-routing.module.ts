@@ -4,7 +4,9 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/main-menu/main-menu.module').then((m) => m.MainMenuModule),
+      import('./pages/main-menu/main-menu.module').then(
+        (m) => m.MainMenuModule,
+      ),
   },
   {
     path: 'notes',
@@ -12,12 +14,14 @@ const routes: Routes = [
       import('./pages/notes/notes.module').then((m) => m.NotesModule),
   },
   {
-
+    path: 'tasks',
+    loadChildren: () =>
+      import('./pages/tasks/tasks.module').then((m) => m.TasksModule),
   },
   {
     path: '**',
     redirectTo: '/',
-  }
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

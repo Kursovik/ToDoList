@@ -1,5 +1,5 @@
 <div class="flex flex-column align-items-center mt-3">
-  <h2>Заметка от {{ note.createdOn | date: "dd.MM.yy"  }}</h2>
+  <h2>Заметка от {{ note?.createdOn | date: "dd.MM.yy"  }}</h2>
   <div class="w-5">
     <app-notes-form
       [configData]="note"

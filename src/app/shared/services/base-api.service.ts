@@ -1,25 +1,9 @@
 import { Injectable } from '@angular/core';
 import {ApiServiceAbstract} from "../abstract-models/api-service-abstract";
 import {Observable, of} from "rxjs";
-
-@Injectable({
-  providedIn: 'root'
-})
-export class BaseApiService<T> extends ApiServiceAbstract<T>{
-  create(data: T): Observable<T> {
-    return of(data);
-  }
-
-  delete(id: number): Observable<number> {
-    return of(id);
-  }
-
-  edit(data: T): Observable<T> {
-    return of(data);
-  }
-
-  getAll(): Observable<T[]> {
-    return of([
+const data =
+  {
+    'notes': [
       {
         title: 'Note1',
         createdOn: new Date(),
@@ -62,6 +46,26 @@ export class BaseApiService<T> extends ApiServiceAbstract<T>{
         text: 'lorem ipsum dolor sit amet, consectetur',
         id: 7,
       },
-    ]) as unknown as Observable<T[]>;
+    ]
+  }
+@Injectable({
+  providedIn: 'root'
+})
+export class BaseApiService<T> extends ApiServiceAbstract<T>{
+  create(data: T): Observable<T> {
+    return of(data);
+  }
+
+  delete(id: number): Observable<number> {
+    return of(id);
+  }
+
+  edit(data: T): Observable<T> {
+    return of(data);
+  }
+
+  getAll(): Observable<T[]> {
+    console.log('Запрос выполнился');
+    return of(data.notes) as unknown as Observable<T[]>;
   }
 }
