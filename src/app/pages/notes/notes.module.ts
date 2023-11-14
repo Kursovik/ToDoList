@@ -7,7 +7,6 @@ import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
 import { NoteComponent } from './notes/pages/note/note.component';
 import {NotesStateService} from "./notes/services/notes-state.service";
-import {NotesLogicService} from "./notes/services/notes-logic.service";
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import { NotesFormComponent } from './notes/pages/notes-form/notes-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -42,6 +41,6 @@ import {SliceTextModule} from "../../shared/pipes/slice-text/slice-text.module";
     InputTextareaModule,
     SliceTextModule,
   ],
-  providers:[NotesStateService,NotesLogicService, DialogService]
+  providers:[NotesStateService, DialogService]
 })
 export class NotesModule {}

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NotesLogicService } from './services/notes-logic.service';
-import { NotesStateService } from './services/notes-state.service';
 import { NotesDialogService } from './services/notes-dialog.service';
 import { Note } from '../types/note';
-import { take } from 'rxjs';
+import { BaseHandlerService } from '../../../shared/services/base-handler.service';
+import { CacheStateService } from '../../../shared/services/cache-state.service';
 
 @Component({
   selector: 'app-notes',
@@ -12,19 +11,20 @@ import { take } from 'rxjs';
   providers: [NotesDialogService],
 })
 export class NotesComponent implements OnInit {
-  public notes$ = this.notesStateService.getNotesStateObservable();
+  public notes$ = this.cacheStateService.state;
   private notesCopy: Note[];
   constructor(
-    private notesLogicService: NotesLogicService,
-    private notesStateService: NotesStateService,
     private dialogService: NotesDialogService,
+    private readonly cacheStateService: CacheStateService<Note>,
+    private readonly baseHandlerService: BaseHandlerService<Note>,
   ) {}
   public ngOnInit(): void {
     this.getNotes();
-    this.notesCopy = [...this.notesStateService.getState()];
+    this.notesCopy = this.cacheStateService.getStaticState();
   }
   private getNotes() {
-    this.notesLogicService.getNotes().subscribe();
+    // this.notesLogicService.getNotes().subscribe();
+    this.baseHandlerService.initState().subscribe();
   }
   public openNotesDialog(): void {
     this.dialogService.openDialog().onClose.subscribe();
@@ -32,13 +32,11 @@ export class NotesComponent implements OnInit {
 
   public searchNotes(str: string): void {
     str
-      ? this.notesStateService.setNotesState(
+      ? this.cacheStateService.setState(
           this.notesCopy.filter((data) => {
             return data.title.toLowerCase().includes(str.toLowerCase());
           }),
         )
-      : this.notesStateService.setNotesState(this.notesCopy);
+      : this.cacheStateService.setState(this.notesCopy);
   }
-
-  protected readonly length = length;
 }
