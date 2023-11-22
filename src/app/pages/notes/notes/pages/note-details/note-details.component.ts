@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NotesLogicService } from '../../services/notes-logic.service';
 import { Note } from '../../../types/note';
-import { NotesStateService } from '../../services/notes-state.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { map, switchMap, tap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
+import {BaseHandlerService} from "../../../../../shared/services/base-handler.service";
+
 
 @Component({
   selector: 'app-note-details',
@@ -13,25 +13,25 @@ import { map, switchMap, tap } from 'rxjs';
 export class NoteDetailsComponent implements OnInit {
   public note: Note;
   constructor(
-    private readonly notesLogicService: NotesLogicService,
-    private readonly notesStateService: NotesStateService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly baseHandlerService: BaseHandlerService<Note>,
   ) {}
   public ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
         map((params) => params['id']),
-        switchMap((id) => this.notesLogicService.getNotesById(id)),
-        tap((note) => (this.note = note)),
+        switchMap((id) => this.baseHandlerService.initState().pipe(map(notes=> notes.filter(note=> note.id === +id)))),
+
       )
-      .subscribe(note=>{
-        console.log(note)
-      });
+      .subscribe(data=>{
+       this.note = data[0]
+        }
+      );
   }
 
   public submitForm(note: Note) {
-    this.notesLogicService.editNotes(note).subscribe();
+    note && this.baseHandlerService.edit(note).subscribe();
     this.router.navigate(['notes']);
   }
 }

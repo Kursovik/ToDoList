@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { NotesLogicService } from '../../services/notes-logic.service';
 import { Note } from '../../../types/note';
+import { BaseHandlerService } from '../../../../../shared/services/base-handler.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-notes-dialog',
@@ -13,16 +14,13 @@ export class NotesDialogComponent {
   constructor(
     private configData: DynamicDialogConfig,
     private ref: DynamicDialogRef,
-    private notesLogicService: NotesLogicService,
+    private readonly baseHandlerService: BaseHandlerService<Note>,
   ) {}
   public submit(note: Note): void {
     if (note) this.checkConfig(note).subscribe();
-
     this.ref.close(note);
   }
-  private checkConfig(note: Note) {
-    return this.note
-      ? this.notesLogicService.editNotes(note)
-      : this.notesLogicService.createNotes(note);
+  private checkConfig(note: Note): Observable<Note> {
+    return this.baseHandlerService.create(note);
   }
 }
