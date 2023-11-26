@@ -37,7 +37,7 @@ export class SidebarMenuComponent implements OnInit {
     });
   }
   private checkCurrentPageTitle(url: string) {
-    let arrayUrl = url.split('/');
+    const arrayUrl = url.split('/');
     this.menuCategories.forEach((category) => {
       if (category.routerLink === arrayUrl[1]) {
         this.currentPageTitle = category.title;

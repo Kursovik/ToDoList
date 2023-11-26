@@ -1,13 +1,28 @@
-::ng-deep{
-.p-button{
-  color: #343434;
-  background: rgba(192, 204, 227, 0.24);
-  border: 1px solid rgba(51, 51, 51, 0.1);
-
+::ng-deep {
+  .p-button {
+    color: #ffffff;
+    background: transparent;
+    border: none;
+  }
+  .p-button:hover {
+    background: rgba(211, 211, 211, 0) !important;
+    color: white;
+  }
+  .card {
+    background-color: rgb(222, 204, 0);
+    border-radius: 1rem;
+    color: black;
+    .p-button:hover {
+      background: transparent !important;
+      color: #a8a7a7;
+    }
+    .p-button {
+      color: black;
+    }
+  }
+  .p-dialog .p-dialog-content,
+  .p-dialog .p-dialog-header {
+    color: white;
+    background: black;
+  }
 }
-.p-button:hover{
-  background: rgba(211, 211, 211, 0.34) !important;
-  color: rgb(14, 14, 14) !important;
-}
-}
-

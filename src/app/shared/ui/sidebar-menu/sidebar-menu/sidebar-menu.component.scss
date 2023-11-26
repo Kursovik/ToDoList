@@ -1,9 +1,11 @@
 :host ::ng-deep {
   .p-sidebar .p-sidebar-content {
     padding: 0;
+    background-color: #141414;
   }
   .p-sidebar .p-sidebar-header {
-    padding-left: 0;
+    padding:0;
+    background-color: #141414;
   }
   .p-button {
     border: none;
@@ -15,5 +17,16 @@
   .p-menu {
     width: 100% !important;
     border: none;
+
+    background-color: #141414;
+  }
+  .p-menu .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+    color: #000000;
+  }
+  .p-menu .p-menuitem-link:not(.p-disabled) .p-menuitem-text{
+    color: white;
+  }
+  .p-sidebar .p-sidebar-footer {
+    background-color: #141414;
   }
 }

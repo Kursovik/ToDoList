@@ -13,12 +13,12 @@ import {
 export class CarouselComponent<T> implements OnChanges {
   @Input() public values: T[];
   @Input()
-  public numOfVisibleValues: number = 2;
+  public numOfVisibleValues = 2;
 
   @ContentChild('body', { static: true })
   public body: TemplateRef<any>;
   public valuesView: T[] ;
-  private levelView: number = 0;
+  private levelView = 0;
  public ngOnChanges(): void {
    this.initialValuesView();
   }

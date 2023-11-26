@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@angular/core';
 import { BaseApiService } from './base-api.service';
-import { BehaviorSubject, Observable, switchAll, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { CacheStateService } from './cache-state.service';
 import { StateSliceService } from './state-slice.service';
-import {API_URL} from "../injection-tokens/api.token";
+import { API_URL } from '../injection-tokens/api.token';
 
+/** Базовый handler сервис для всех разделов*/
 @Injectable()
 export class BaseHandlerService<T extends { id: number }> {
-  public api = 'notes';
   constructor(
     private baseApiService: BaseApiService<T>,
     private stateSliceService: StateSliceService<T>,
@@ -20,9 +20,8 @@ export class BaseHandlerService<T extends { id: number }> {
     return this.apiUrl.pipe(switchMap((api) => this.getAll(api)));
   }
   public getAll(apiUrl: string): Observable<T[]> {
-    console.log(apiUrl);
-    return this.cacheStateService.state[this.api]
-      ? this.cacheStateService.state[this.api].asObservable()
+    return this.cacheStateService.state[apiUrl]
+      ? this.cacheStateService.state[apiUrl].asObservable()
       : this.baseApiService.getAll().pipe(
           tap((data) => {
             this.stateSliceService.setState(data);
@@ -35,15 +34,17 @@ export class BaseHandlerService<T extends { id: number }> {
         this.stateSliceService.setState(
           item.id
             ? [
-                ...this.cacheStateService.state[this.api]
+                ...this.cacheStateService.state[this.apiUrl.getValue()]
                   .getValue()
-                  .map((data) => {
-                    return item.id === data.id ? item : data;
-                  }),
+                  .map((data) => (item.id === data.id ? item : data)),
               ]
-            : [...this.cacheStateService.state[this.api].getValue(), item],
+            : [
+                ...this.cacheStateService.state[
+                  this.apiUrl.getValue()
+                ].getValue(),
+                item,
+              ],
         );
-        console.log(this.cacheStateService.state[this.api]);
       }),
     );
   }
@@ -52,5 +53,16 @@ export class BaseHandlerService<T extends { id: number }> {
   }
   public edit(item: T) {
     return this.createOrEdit(item, 'edit');
+  }
+  public delete(id: number): Observable<unknown> {
+    return this.baseApiService.delete(id).pipe(
+      tap((id) => {
+        this.stateSliceService.setState([
+          ...this.cacheStateService.state[this.apiUrl.getValue()]
+            .getValue()
+            .filter((data) => data.id !== id),
+        ]);
+      }),
+    );
   }
 }

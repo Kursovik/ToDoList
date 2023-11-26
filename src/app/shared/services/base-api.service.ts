@@ -1,57 +1,63 @@
-import { Injectable } from '@angular/core';
-import {ApiServiceAbstract} from "../abstract-models/api-service-abstract";
-import {Observable, of} from "rxjs";
-const data =
-  {
-    'notes': [
-      {
-        title: 'Note1',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 1,
-      },
-      {
-        title: 'Not2',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 2,
-      },
-      {
-        title: 'Note3',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 3,
-      },
-      {
-        title: 'Note4',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 4,
-      },
-      {
-        title: 'Note5',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 5,
-      },
-      {
-        title: 'Note6',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 6,
-      },
-      {
-        title: 'Note7',
-        createdOn: new Date(),
-        text: 'lorem ipsum dolor sit amet, consectetur',
-        id: 7,
-      },
-    ]
+import { Inject, Injectable } from '@angular/core';
+import { ApiServiceAbstract } from '../abstract-models/api-service-abstract';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { API_URL } from '../injection-tokens/api.token';
+/** Заглушка для бэка */
+const data: { [key: string]: Array<unknown>} = {
+  notes: [
+    {
+      title: 'Встать',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur',
+      id: 1,
+    },
+    {
+      title: 'Помыть посуду',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet, consectetur',
+      id: 2,
+    },
+    {
+      title: 'Сходить в магазин и купить продукты',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet, consectetur',
+      id: 3,
+    },
+    {
+      title: 'Постирать вещи',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet, consectetur',
+      id: 4,
+    },
+    {
+      title: 'Определить планы на будущее',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet, consectetur',
+      id: 5,
+    },
+    {
+      title: 'Приготовить поесть',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet, consectetur',
+      id: 6,
+    },
+    {
+      title: 'Погулять с девушкой',
+      createdOn: new Date(),
+      text: 'lorem ipsum dolor sit amet,  consectetur',
+      id: 7,
+    },
+  ],
+};
+/** Базовый api сервис для всех разделов*/
+@Injectable()
+export class BaseApiService<T> extends ApiServiceAbstract<T> {
+  constructor(
+    @Inject(API_URL)
+    private apiUrl: BehaviorSubject<string>,
+  ) {
+    super();
   }
-@Injectable({
-  providedIn: 'root'
-})
-export class BaseApiService<T> extends ApiServiceAbstract<T>{
   create(data: T): Observable<T> {
     return of(data);
   }
@@ -65,7 +71,6 @@ export class BaseApiService<T> extends ApiServiceAbstract<T>{
   }
 
   getAll(): Observable<T[]> {
-    console.log('Запрос выполнился');
-    return of(data.notes) as unknown as Observable<T[]>;
+    return of(data[this.apiUrl.getValue()]) as unknown as Observable<T[]>;
   }
 }
