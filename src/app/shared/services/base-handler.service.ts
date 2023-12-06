@@ -30,7 +30,7 @@ export class BaseHandlerService<T extends { id: number }> {
   }
   public createOrEdit(item: T, method: 'create' | 'edit'): Observable<T> {
     return this.baseApiService[method](item).pipe(
-      tap(() => {
+      tap((responseItem) => {
         this.stateSliceService.setState(
           item.id
             ? [
@@ -42,7 +42,7 @@ export class BaseHandlerService<T extends { id: number }> {
                 ...this.cacheStateService.state[
                   this.apiUrl.getValue()
                 ].getValue(),
-                item,
+                responseItem,
               ],
         );
       }),
@@ -56,7 +56,7 @@ export class BaseHandlerService<T extends { id: number }> {
   }
   public delete(id: number): Observable<unknown> {
     return this.baseApiService.delete(id).pipe(
-      tap((id) => {
+      tap(() => {
         this.stateSliceService.setState([
           ...this.cacheStateService.state[this.apiUrl.getValue()]
             .getValue()

@@ -12,7 +12,7 @@
     >
   </div>
   <div class="flex justify-content-end mt-2">
-    <button type="submit" [disabled]="noteForm.invalid" pButton class="mr-2">
+    <button type="submit" [loading]="loading" [disabled]="noteForm.invalid || loading" pButton class="mr-2">
       Добавить
     </button>
     <button pButton type="reset" (click)="cancelSubmitForm()">Отмена</button>

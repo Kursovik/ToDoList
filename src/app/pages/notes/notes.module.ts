@@ -19,6 +19,10 @@ import { StateSliceService } from '../../shared/services/state-slice.service';
 import { BaseHandlerService } from '../../shared/services/base-handler.service';
 import { InputSearchModule } from '../../shared/components/input-search/input-search.module';
 import { BaseApiService } from '../../shared/services/base-api.service';
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {ConfirmationService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+
 
 const NotesProviders: Provider[] = [
   {
@@ -57,10 +61,13 @@ const NotesProviders: Provider[] = [
     InputTextareaModule,
     InputSearchModule,
     SliceTextModule,
+    ProgressSpinnerModule,
+    ConfirmDialogModule,
   ],
   providers: [
     DialogService,
     NotesProviders,
+    ConfirmationService,
   ],
 })
 export class NotesModule {}

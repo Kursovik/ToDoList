@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Note } from '../../../types/note';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 import { BaseHandlerService } from '../../../../../shared/services/base-handler.service';
+import { LoaderService } from '../../../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-note-details',
-  template: `
-    <div
-      style="border: 1px solid #d3cec6"
-      class="flex flex-column align-items-center mt-3 w-6 my-0 mx-auto p-3 border-round-bottom-lg"
-    >
-      <h2>Заметка от {{ note?.createdOn | date: 'dd.MM.yy' }}</h2>
-      <div class="w-full">
-        <app-notes-form
-          [configData]="note"
-          (submitted)="submitForm($event)"
-        ></app-notes-form>
-      </div>
-    </div>`,
+  template: ` <div
+    style="border: 1px solid #d3cec6"
+    class="flex flex-column align-items-center mt-3 w-6 my-0 mx-auto p-3 border-round-bottom-lg"
+  >
+    <h2>Заметка от {{ note?.createdOn | date: 'dd.MM.yy' }}</h2>
+    <div class="w-full">
+      <app-notes-form
+        [loading]="!!(loader.loading | async)"
+        [configData]="note"
+        (submitted)="submitForm($event)"
+      ></app-notes-form>
+    </div>
+  </div>`,
+  providers: [LoaderService],
 })
 export class NoteDetailsComponent implements OnInit {
   public note: Note;
@@ -26,6 +28,7 @@ export class NoteDetailsComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly baseHandlerService: BaseHandlerService<Note>,
+    public loader: LoaderService,
   ) {}
   public ngOnInit(): void {
     this.activatedRoute.params
@@ -43,7 +46,10 @@ export class NoteDetailsComponent implements OnInit {
   }
 
   public submitForm(note: Note) {
-    note && this.baseHandlerService.edit(note).subscribe();
-    this.router.navigate(['notes']);
+    note &&
+      this.loader
+        .isLoading(this.baseHandlerService.edit(note))
+        .pipe(tap(() => this.router.navigate(['notes'])))
+        .subscribe();
   }
 }

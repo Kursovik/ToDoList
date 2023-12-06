@@ -2,16 +2,19 @@ import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Note } from '../../../types/note';
 import { BaseHandlerService } from '../../../../../shared/services/base-handler.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { LoaderService } from '../../../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-notes-dialog',
   template: `<div class="p-2">
     <app-notes-form
+      [loading]="!!(loader.loading | async)"
       [configData]="note"
       (submitted)="submit($event)"
     ></app-notes-form>
   </div>`,
+  providers: [LoaderService],
 })
 export class NotesDialogComponent {
   public note = this.configData.data;
@@ -19,12 +22,15 @@ export class NotesDialogComponent {
     private configData: DynamicDialogConfig,
     private ref: DynamicDialogRef,
     private readonly baseHandlerService: BaseHandlerService<Note>,
+    public loader: LoaderService,
   ) {}
   public submit(note: Note): void {
-    if (note) this.checkConfig(note).subscribe();
-    this.ref.close(note);
+    if (note)
+      this.createNote(note)
+        .pipe(tap(() => this.ref.close(note)))
+        .subscribe();
   }
-  private checkConfig(note: Note): Observable<Note> {
-    return this.baseHandlerService.create(note);
+  private createNote(note: Note): Observable<unknown> {
+    return this.loader.isLoading(this.baseHandlerService.create(note));
   }
 }

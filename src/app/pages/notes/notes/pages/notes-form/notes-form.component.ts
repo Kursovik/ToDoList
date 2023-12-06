@@ -8,6 +8,8 @@ import { Note } from '../../../types/note';
   styleUrls: ['./notes-form.component.scss'],
 })
 export class NotesFormComponent implements OnInit {
+  @Input()
+  public loading: boolean;
   @Input() public configData: Note;
   @Output()
   public submitted = new EventEmitter();
