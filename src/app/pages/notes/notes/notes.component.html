@@ -8,7 +8,7 @@
       (click)="openNotesDialog()"
     ></button>
   </div>
-  <div *ngIf="!!(loader.loading | async); else progressSpinner">
+  <div *ngIf="!(loader.loading | async); else progressSpinner">
     <div
       class="w-full grid mt-3"
       *ngIf="(notes$ | async)?.length; else emptyNotes"
