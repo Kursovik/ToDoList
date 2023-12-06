@@ -1,11 +1,11 @@
 :host ::ng-deep {
   .p-sidebar .p-sidebar-content {
     padding: 0;
-    background-color: #141414;
+    background-color: #dedad2;
   }
   .p-sidebar .p-sidebar-header {
     padding:0;
-    background-color: #141414;
+    background-color: #dedad2;
   }
   .p-button {
     border: none;
@@ -18,15 +18,15 @@
     width: 100% !important;
     border: none;
 
-    background-color: #141414;
+    background-color:#dedad2;
   }
   .p-menu .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
-    color: #000000;
+    color: #424037;
   }
   .p-menu .p-menuitem-link:not(.p-disabled) .p-menuitem-text{
-    color: white;
+    color: #85847e;
   }
   .p-sidebar .p-sidebar-footer {
-    background-color: #141414;
+    background-color:#dedad2;
   }
 }

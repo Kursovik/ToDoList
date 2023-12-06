@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StateSliceService } from '../../../services/state-slice.service';
 import { FormControl } from '@angular/forms';
-import { tap } from 'rxjs';
+import { forkJoin, Observable, take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-input-search[searchLabel]',
@@ -37,8 +37,16 @@ export class InputSearchComponent<T extends { [key: string]: string }>
   constructor(private stateSliceService: StateSliceService<T>) {}
 
   public ngOnInit(): void {
-    this.copyValue =  this.stateSliceService.staticState
-    this.searchFormControl.valueChanges.pipe(
+    forkJoin(this.getCopyValue(), this.changeInputValue()).subscribe();
+  }
+  private getCopyValue(): Observable<T[]> {
+    return this.stateSliceService.state.pipe(
+      take(2),
+      tap((data) => (this.copyValue = data)),
+    );
+  }
+  private changeInputValue(): Observable<unknown> {
+    return this.searchFormControl.valueChanges.pipe(
       tap((value) => {
         value
           ? this.stateSliceService.setState(
@@ -50,6 +58,6 @@ export class InputSearchComponent<T extends { [key: string]: string }>
             )
           : this.stateSliceService.setState(this.copyValue);
       }),
-    ).subscribe();
+    );
   }
 }

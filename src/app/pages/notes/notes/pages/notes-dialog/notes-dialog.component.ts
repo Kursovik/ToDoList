@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-notes-dialog',
-  template: `<div class="card p-2">
+  template: `<div class="p-2">
     <app-notes-form
       [configData]="note"
       (submitted)="submit($event)"

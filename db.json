@@ -1,0 +1,28 @@
+{
+  "notes": [
+    {
+      "title": "Встать",
+      "text": "lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur lorem ipsum dolor sit amet, consectetur",
+      "createdOn": "2023-12-06T13:50:21.154Z",
+      "id": 1
+    },
+    {
+      "title": "Помыть посуду",
+      "createdOn": "2021.10.03",
+      "text": "lorem ipsum dolor sit amet, consectetur",
+      "id": 2
+    },
+    {
+      "title": "Сходить в магазин и купить продукты",
+      "createdOn": "2021.10.05",
+      "text": "lorem ipsum dolor sit amet, consectetur",
+      "id": 3
+    },
+    {
+      "title": "Искупаться в пруду",
+      "text": "у самурая нет цели - есть только путь \n",
+      "createdOn": "2023-12-06T13:51:03.937Z",
+      "id": 4
+    }
+  ]
+}

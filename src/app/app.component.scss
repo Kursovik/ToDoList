@@ -1,6 +1,6 @@
 ::ng-deep {
   .p-button {
-    color: #ffffff;
+    color: #797171;
     background: transparent;
     border: none;
   }
@@ -9,20 +9,20 @@
     color: white;
   }
   .card {
-    background-color: rgb(222, 204, 0);
+    background-color: rgb(213, 201, 154);
     border-radius: 1rem;
-    color: black;
+    color: #625f58;
     .p-button:hover {
       background: transparent !important;
       color: #a8a7a7;
     }
     .p-button {
-      color: black;
+      color: #797171;
     }
   }
   .p-dialog .p-dialog-content,
   .p-dialog .p-dialog-header {
-    color: white;
-    background: black;
+    color: #706c54;
+    background: #d2cbbf;
   }
 }

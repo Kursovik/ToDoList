@@ -34,7 +34,7 @@ import { BaseHandlerService } from '../../../../../shared/services/base-handler.
   styles: [
     `
       :host .card:hover {
-        background-color: rgba(255, 215, 0, 0.82);
+        background-color: rgb(189, 172, 76);
       }
     `,
   ],

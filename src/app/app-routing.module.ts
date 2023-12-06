@@ -14,11 +14,6 @@ const routes: Routes = [
       import('./pages/notes/notes.module').then((m) => m.NotesModule),
   },
   {
-    path: 'tasks',
-    loadChildren: () =>
-      import('./pages/tasks/tasks.module').then((m) => m.TasksModule),
-  },
-  {
     path: '**',
     redirectTo: '/',
   },

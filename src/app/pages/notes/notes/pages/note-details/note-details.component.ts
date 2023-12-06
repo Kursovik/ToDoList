@@ -6,17 +6,19 @@ import { BaseHandlerService } from '../../../../../shared/services/base-handler.
 
 @Component({
   selector: 'app-note-details',
-  template: `<div
-    class="card flex flex-column align-items-center mt-3 w-6 my-0 mx-auto p-3 "
-  >
-    <h2>Заметка от {{ note?.createdOn | date: 'dd.MM.yy' }}</h2>
-    <div class="w-full">
-      <app-notes-form
-        [configData]="note"
-        (submitted)="submitForm($event)"
-      ></app-notes-form>
-    </div>
-  </div>`,
+  template: `
+    <div
+      style="border: 1px solid #d3cec6"
+      class="flex flex-column align-items-center mt-3 w-6 my-0 mx-auto p-3 border-round-bottom-lg"
+    >
+      <h2>Заметка от {{ note?.createdOn | date: 'dd.MM.yy' }}</h2>
+      <div class="w-full">
+        <app-notes-form
+          [configData]="note"
+          (submitted)="submitForm($event)"
+        ></app-notes-form>
+      </div>
+    </div>`,
 })
 export class NoteDetailsComponent implements OnInit {
   public note: Note;

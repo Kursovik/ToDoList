@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderModule } from './shared/ui/header/header.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     RouterOutlet,
     HeaderModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
