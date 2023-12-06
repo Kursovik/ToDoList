@@ -5,11 +5,11 @@
     border: none;
   }
   .p-button:hover {
-    background: rgba(211, 211, 211, 0) !important;
-    color: white;
+    background: rgba(210, 210, 163, 0.24) !important;
+    color: #413e34 !important;
   }
   .card {
-    background-color: rgb(213, 201, 154);
+    background-color: rgb(246, 227, 154);
     border-radius: 1rem;
     color: #625f58;
     .p-button:hover {
@@ -22,7 +22,7 @@
   }
   .p-dialog .p-dialog-content,
   .p-dialog .p-dialog-header {
-    color: #706c54;
-    background: #d2cbbf;
+    color: #4d4d44;
+    background: #fcf7e7;
   }
 }
