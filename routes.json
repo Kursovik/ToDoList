@@ -1,0 +1,4 @@
+{
+  "/users/:usersId/notes/:notesId": "/notes/:notesId",
+  "/users/:usersId/login/:loginId": "/login/:loginId"
+}
