@@ -10,7 +10,7 @@
   </div>
   <div *ngIf="!(loader.loading | async); else progressSpinner">
     <div
-      class="w-full grid mt-3"
+      class="grid w-screen justify-content-center mt-3"
       *ngIf="(notes$ | async)?.length; else emptyNotes"
     >
       <div class="col-4" *ngFor="let note of notes$ | async">
@@ -32,8 +32,11 @@
 </ng-template>
 <ng-template #progressSpinner>
   <div class="flex m-5">
-    <p-progressSpinner styleClass="w-6rem h-6rem" strokeWidth="8"  animationDuration="1s"></p-progressSpinner>
+    <p-progressSpinner
+      styleClass="w-6rem h-6rem"
+      strokeWidth="8"
+      animationDuration="1s"
+    ></p-progressSpinner>
   </div>
-
 </ng-template>
 <p-confirmDialog></p-confirmDialog>

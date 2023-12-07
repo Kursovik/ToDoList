@@ -6,6 +6,7 @@ import { cloneDeep } from '../../utils/cloneDeep';
 })
 export class SliceTextPipe<T> implements PipeTransform {
   transform(value: T, sliceValue: number) {
+    if(!value) return ;
     const copyValue: string = cloneDeep(value);
     return (
       copyValue.slice(0, sliceValue) +

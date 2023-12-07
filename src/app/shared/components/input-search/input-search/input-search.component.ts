@@ -15,14 +15,14 @@ import { forkJoin, Observable, take, tap } from 'rxjs';
       input {
         width: 100%;
         background-color: transparent;
-        color: #d9d4d4;
+        color: #565049;
         font-size: 17px;
         border: none;
         box-sizing: border-box;
       }
 
       input:hover {
-        background-color: rgba(169, 169, 169, 0.35);
+        background-color: rgba(250, 238, 182, 0.35);
       }
     `,
   ],

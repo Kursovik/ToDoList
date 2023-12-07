@@ -46,7 +46,10 @@ export class NoteDetailsComponent implements OnInit {
   }
 
   public submitForm(note: Note) {
-    note &&
+    if(!note){
+      this.router.navigate(['notes']);
+      return;
+    }
       this.loader
         .isLoading(this.baseHandlerService.edit(note))
         .pipe(tap(() => this.router.navigate(['notes'])))
