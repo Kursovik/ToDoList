@@ -14,6 +14,13 @@ const routes: Routes = [
       import('./pages/notes/notes.module').then((m) => m.NotesModule),
   },
   {
+    path: 'authorization',
+    loadChildren: () =>
+      import('./shared/ui/authorization/authorization.module').then(
+        (m) => m.AuthorizationModule,
+      ),
+  },
+  {
     path: '**',
     redirectTo: '/',
   },

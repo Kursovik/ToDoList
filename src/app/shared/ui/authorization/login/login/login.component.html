@@ -1,0 +1,28 @@
+
+<div class="w-6 mx-auto my-0">
+  <div class="w-full flex justify-content-center"><h2>Вход</h2></div>
+
+  <form class="grid flex-column" (ngSubmit)="loginUser()" [formGroup]="loginForm">
+
+    <div class="col">
+      <span class="p-float-label">
+        <input id="email" pInputText formControlName="email" type="email" />
+        <label for="email">Почта</label>
+      </span>
+    </div>
+    <div class="col">
+      <span class="p-float-label">
+        <input
+          id="password"
+          pInputText
+          formControlName="password"
+          type="password"
+        />
+        <label for="password">Пароль</label>
+      </span>
+    </div>
+    <div class="w-full flex justify-content-end">
+      <button pButton>Войти</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,39 @@
+
+<div class="w-6 mx-auto my-0">
+  <div class="w-full flex justify-content-center"><h2>Регистрация</h2></div>
+
+  <form class="grid flex-column" (ngSubmit)="createUser()" [formGroup]="regForm">
+    <div class="col">
+      <span class="p-float-label">
+        <input id="name" pInputText formControlName="name" type="text" />
+        <label for="name">Имя</label>
+      </span>
+    </div>
+    <div class="col">
+      <span class="p-float-label">
+        <input id="email" pInputText formControlName="email" type="email" />
+        <label for="email">Электронная почта</label>
+      </span>
+    </div>
+    <div class="col">
+      <span class="p-float-label">
+        <input id="login" pInputText formControlName="login" type="text" />
+        <label for="login">Логин</label>
+      </span>
+    </div>
+    <div class="col">
+      <span class="p-float-label">
+        <input
+          id="password"
+          pInputText
+          formControlName="password"
+          type="password"
+        />
+        <label for="password">Пароль</label>
+      </span>
+    </div>
+    <div class="w-full flex justify-content-end">
+    <button pButton>Зарегистрироваться</button>
+    </div>
+  </form>
+</div>
