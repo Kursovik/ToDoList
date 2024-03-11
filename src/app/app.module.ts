@@ -7,7 +7,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderModule } from './shared/ui/header/header.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from "@angular/common/http";
-import {UserInitializeProvider} from "./shared/functions/initializeApp";
+import {ConfirmationService} from "primeng/api";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +21,7 @@ import {UserInitializeProvider} from "./shared/functions/initializeApp";
     HttpClientModule,
   ],
   providers: [
-    UserInitializeProvider,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent],
 })
