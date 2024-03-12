@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { menuCategories } from '../../../constants/menu-categories';
 import { MenuItem } from 'primeng/api';
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -9,6 +10,10 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./sidebar-menu.component.scss'],
 })
 export class SidebarMenuComponent implements OnInit {
+  @Input()
+  public user: User;
+  @Output()
+  public logoutUser = new EventEmitter<Event>()
   public sidebarVisible: boolean;
   public currentPageTitle: string;
   public readonly menuCategories = menuCategories;

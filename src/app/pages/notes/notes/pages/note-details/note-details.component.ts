@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap } from 'rxjs';
 import { BaseHandlerService } from '../../../../../shared/services/base-handler.service';
 import { LoaderService } from '../../../../../shared/services/loader.service';
+import { GlobalMessageService } from '../../../../../shared/services/global-message.service';
 
 @Component({
   selector: 'app-note-details',
@@ -28,7 +29,8 @@ export class NoteDetailsComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly baseHandlerService: BaseHandlerService<Note>,
-    public loader: LoaderService,
+    public readonly loader: LoaderService,
+    private readonly messageService: GlobalMessageService,
   ) {}
   public ngOnInit(): void {
     this.activatedRoute.params
@@ -46,13 +48,22 @@ export class NoteDetailsComponent implements OnInit {
   }
 
   public submitForm(note: Note) {
-    if(!note){
+    if (!note) {
       this.router.navigate(['notes']);
       return;
     }
-      this.loader
-        .isLoading(this.baseHandlerService.edit(note))
-        .pipe(tap(() => this.router.navigate(['notes'])))
-        .subscribe();
+    this.loader
+      .isLoading(this.baseHandlerService.edit(note))
+      .pipe(
+        tap(() => {
+          this.messageService.addMessage(
+            'success',
+            'Заметка обновлена!',
+            'Запрос прошел успешно',
+          );
+          this.router.navigate(['notes']);
+        }),
+      )
+      .subscribe();
   }
 }

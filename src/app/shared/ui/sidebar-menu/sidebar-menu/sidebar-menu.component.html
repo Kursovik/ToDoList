@@ -1,12 +1,28 @@
-<p-sidebar [(visible)]="sidebarVisible" [showCloseIcon]="false">
-  <ng-template pTemplate="header"><p-button (click)="sidebarVisible = false" [label]="currentPageTitle" icon="pi pi-bars" >
-  </p-button
+<p-sidebar
+  [(visible)]="sidebarVisible"
+  [showCloseIcon]="false"
+  position="right"
+>
+  <ng-template pTemplate="header">
+    <div class="flex align-items-center justify-content-between">
+      <p-button (click)="sidebarVisible = false" [label]="user.name">
+      </p-button>
+      <div>
+        <p-button icon="pi pi-pencil"></p-button>
+        <p-button
+          icon="pi pi-sign-out"
+          (click)="logoutUser.emit($event)"
+        ></p-button>
+        <p-confirmPopup></p-confirmPopup>
+      </div></div
   ></ng-template>
   <ng-template pTemplate="content">
-    <p-menu  [model]="items"></p-menu>
+    <p-menu [model]="items"></p-menu>
   </ng-template>
-  <ng-template pTemplate="footer">Footer Content</ng-template>
 </p-sidebar>
-<p-button (click)="sidebarVisible = true" [label]="currentPageTitle" icon="pi pi-bars" >
- </p-button
->
+<p-button
+  icon="pi pi-bars"
+  iconPos="right"
+  (click)="sidebarVisible = true"
+  [label]="user.name"
+></p-button>

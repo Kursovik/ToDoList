@@ -9,7 +9,6 @@ import { environment } from '../../../environments/local';
 export class BaseApiService<
   T extends { id: number },
 > extends ApiServiceAbstract<T> {
-  private userToken = localStorage.getItem('token');
   constructor(
     @Inject(API_URL)
     private apiUrl: BehaviorSubject<string>,

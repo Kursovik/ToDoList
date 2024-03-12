@@ -5,8 +5,9 @@ $sideBarBackgroundColor: #f5edde;
     background-color: $sideBarBackgroundColor;
   }
   .p-sidebar .p-sidebar-header {
-    padding:0;
+    padding: 0;
     background-color: $sideBarBackgroundColor;
+    display: block !important;
   }
   .p-button {
     border: none;
@@ -17,14 +18,14 @@ $sideBarBackgroundColor: #f5edde;
   }
   .p-menu {
     width: 100% !important;
+    font-size: 1.2em;
     border: none;
-
-    background-color:$sideBarBackgroundColor;
+    background-color: $sideBarBackgroundColor;
   }
   .p-menu .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
     color: #424037;
   }
-  .p-menu .p-menuitem-link:not(.p-disabled) .p-menuitem-text{
+  .p-menu .p-menuitem-link:not(.p-disabled) .p-menuitem-text {
     color: #85847e;
   }
   .p-sidebar .p-sidebar-footer {

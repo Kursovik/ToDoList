@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BaseHandlerService } from '../../../../../shared/services/base-handler.service';
 import { LoaderService } from '../../../../../shared/services/loader.service';
 import {ConfirmationService} from "primeng/api";
+import {GlobalMessageService} from "../../../../../shared/services/global-message.service";
+import {catchError, EMPTY, tap} from "rxjs";
 
 @Component({
   selector: 'app-note',
@@ -52,7 +54,8 @@ export class NoteComponent{
     private readonly router: Router,
     private readonly baseHandlerService: BaseHandlerService<Note>,
     public loader: LoaderService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private readonly messageService: GlobalMessageService
   ) {}
   public navigateNoteDetails(note: Note) {
     this.router.navigate([`/notes/${note.id}`]);
@@ -66,7 +69,11 @@ export class NoteComponent{
       acceptLabel: 'Да',
       rejectLabel: 'Нет',
       accept:()=>{
-        this.loader.isLoading(this.baseHandlerService.delete(id)).subscribe();
+        this.loader.isLoading(this.baseHandlerService.delete(id)).pipe(tap(()=>this.messageService.addMessage('success','Успешно','Заметка удалена!')),
+          catchError(err=>{
+          this.messageService.addMessage('error','Ошибка удаления',err)
+          return EMPTY;
+        })).subscribe();
       }
     })
   }
