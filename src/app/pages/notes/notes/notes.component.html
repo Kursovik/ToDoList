@@ -10,10 +10,10 @@
   </div>
   <div *ngIf="!(loader.loading | async); else progressSpinner">
     <div
-      class="grid w-screen justify-content-center mt-3"
+      class="flex flex-wrap gap-3 w-screen justify-content-center mt-3"
       *ngIf="(notes$ | async)?.length; else emptyNotes"
     >
-      <div class="col-4" *ngFor="let note of notes$ | async">
+      <div *ngFor="let note of notes$ | async">
         <app-note [note]="note"></app-note>
       </div>
     </div>

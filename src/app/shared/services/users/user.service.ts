@@ -28,6 +28,9 @@ export class UserService {
   public setUser(user: User) {
     this._user.next(user);
   }
+  public get isUserLoggedIn(){
+    return !!localStorage.getItem('token')
+  }
 
   public register(userRegistry: User) {
     return this.http.post(`${environment.local}/register`, userRegistry).pipe(
@@ -36,7 +39,7 @@ export class UserService {
         this.router.navigate([`/authorization/${authorization.login}`]);
       }),
       catchError((err) => {
-        this.globalMessageService.addMessage('error','Ошибка при регистрации','Пользователь с таким именем уже существует')
+        this.globalMessageService.addMessage('error','Ошибка при регистрации','Пользователь с такой электронной почтой уже существует')
         console.error(err);
         return EMPTY;
       }),
@@ -58,13 +61,12 @@ export class UserService {
           this.router.navigate(['/']);
         }),
         catchError((err)=>{
-          this.globalMessageService.addMessage('error','Вы ввели неправильный логин и пароль', 'Попробуйте еще раз')
+          this.globalMessageService.addMessage('error','Вы ввели неправильный логин и пароль', err)
           return EMPTY
         })
       );
   }
   public logout() {
-    // localStorage.removeItem('user');
     this.setUser(null as unknown as User);
     this.router.navigate([`/authorization/${authorization.login}`]);
   }

@@ -22,6 +22,8 @@ import { BaseApiService } from '../../shared/services/base-api.service';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ConfirmationService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { SpeedDialModule } from 'primeng/speeddial';
+
 
 
 const NotesProviders: Provider[] = [
@@ -63,6 +65,7 @@ const NotesProviders: Provider[] = [
     SliceTextModule,
     ProgressSpinnerModule,
     ConfirmDialogModule,
+    SpeedDialModule,
   ],
   providers: [
     DialogService,

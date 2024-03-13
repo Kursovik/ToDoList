@@ -16,6 +16,9 @@
       background: transparent !important;
       color: #a8a7a7;
     }
+    .p-button:focus{
+      box-shadow: none;
+    }
     .p-button {
       color: #797171;
     }

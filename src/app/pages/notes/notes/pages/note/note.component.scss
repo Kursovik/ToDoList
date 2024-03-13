@@ -1,0 +1,21 @@
+:host ::ng-deep {
+  .card{
+    height: 300px;
+    width: 400px;
+  }
+
+    .p-speeddial {
+      position: absolute;
+      top: 3px;
+      right: -1px;
+  }
+  .p-speeddial-button.p-button.p-button-icon-only{
+    width: 2rem;
+    height: 2rem;
+  }
+  .p-speeddial-action{
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+  }
+}

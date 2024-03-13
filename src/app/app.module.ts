@@ -12,6 +12,7 @@ import { AuthInterceptor } from './shared/interseptors/auth.interceptor';
 import { UserService } from './shared/services/users/user.service';
 import { ToastModule } from 'primeng/toast';
 import { GlobalMessageService } from './shared/services/global-message.service';
+import {AuthGuard} from "./shared/guards/auth.guard";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { GlobalMessageService } from './shared/services/global-message.service';
     UserService,
     GlobalMessageService,
     MessageService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

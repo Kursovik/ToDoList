@@ -27,7 +27,7 @@
       </span>
     </div>
     <div class="w-full flex justify-content-end">
-    <button pButton>Зарегистрироваться</button>
+    <button [disabled]="!regForm.valid" pButton>Зарегистрироваться</button>
     </div>
   </form>
 </div>

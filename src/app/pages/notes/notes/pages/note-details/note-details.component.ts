@@ -33,20 +33,19 @@ export class NoteDetailsComponent implements OnInit {
     private readonly messageService: GlobalMessageService,
   ) {}
   public ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(
-        map((params) => params['id']),
-        switchMap((id) =>
-          this.baseHandlerService
-            .initState()
-            .pipe(map((notes) => notes.filter((note) => note.id === +id))),
-        ),
-      )
-      .subscribe((data) => {
-        this.note = data[0];
-      });
+    this.initNote().subscribe();
   }
-
+  private initNote() {
+    return this.activatedRoute.params.pipe(
+      map((params) => params['id']),
+      switchMap((id) =>
+        this.baseHandlerService
+          .initState()
+          .pipe(map((notes) => notes.filter((note) => note.id === +id))),
+      ),
+      tap((data) => (this.note = data[0])),
+    );
+  }
   public submitForm(note: Note) {
     if (!note) {
       this.router.navigate(['notes']);

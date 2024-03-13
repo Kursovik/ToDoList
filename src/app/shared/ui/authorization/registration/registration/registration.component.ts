@@ -16,9 +16,9 @@ export class RegistrationComponent implements OnInit {
   }
   private initRegForm() {
     this.regForm = this.fb.group({
-      name: ['', [Validators.required]],
-      email: [''],
-      password: [''],
+      name: [null, [Validators.required, ]],
+      email: [null, [Validators.pattern(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu)]],
+      password: [null],
     });
   }
 
